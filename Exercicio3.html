@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Aula 200224</title>
+    </head>
+    <body>
+        <div id="app">
+
+        {{n3 ** potencia}} {{n5 ** potencia}} {{n10 ** potencia}}
+        
+            
+            
+        </div>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script>
+            const app = Vue.createApp({
+                    data()
+                    {
+                        return{
+                            n3 : 3,
+                            n5 : 5,
+                            n10 : 10,
+                            potencia : 3
+                        }
+                    },
+                }
+            ).mount('#app')
+                
+        </script>
+    </body>
+</html>
