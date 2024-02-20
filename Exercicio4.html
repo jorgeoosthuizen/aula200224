@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Aula 200224</title>
+    </head>
+    <body>
+        <div id="app">
+            <input type="number"
+            v-model="horas"
+            placeholder="Digite as horas"/>
+            
+            {{horas * 60}}
+
+
+           <br> <input type="number"
+            v-model="minutos"
+            placeholder="Digite os minutos"/>
+
+            {{minutos * 60}}
+        
+
+        </div>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script>
+            const app = Vue.createApp({
+                    data()
+                    {
+                        return{
+                            horas: 0,
+                            minutos: 0
+                        }
+                    }
+                }
+            ).mount('#app')
+                
+        </script>
+    </body>
+</html>
