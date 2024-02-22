@@ -21,7 +21,20 @@
 
         <p> <input type="text" v-Model="nome" placeholder="Indique o seu nome">
         <p v-if="nome == 'Marco'|| nome=='António'"> Boa noite Professor {{nome}}</p>
-        <p v-else> Boa noite {{nome}}</p> 
+        <p v-else> Boa noite {{nome}}</p>
+        <p>{{sumArray(array)}}</p>
+
+        <input type="number" v-model="n">
+        <p> {{ printNumbers(n) }}</p>
+
+        <input type="number" v-model="number">
+        <p> {{ printMultiples(number) }}</p>
+
+        <p v-if="!gameOver">Guess the secret number (between 1 and 100):</p>
+        <input type="number" v-model.number="guess" v-if="!gameOver" />
+        <button @click="guessNumber(guess)" v-if="!gameOver">Guess</button>
+        <p v-if="feedback">{{ feedback }}</p>
+        <p v-if="gameOver">Congratulations! You guessed the number in {{ attempts }} attempts.</p>
 
 
     </div>
@@ -33,23 +46,56 @@
                     n1: 0,
                     n2: 0,
                     nome: "",
-                    n:{array:[1,2,3]}
+                    array: [1, 2, 3, 4, 5, 6],
+                    n: 0,
+                    number: 0,
+                    guess: 0,
+                    secretNumber: Math.floor(Math.random() * 100) + 1,
+                    feedback: "",
+                    attempts: 0,
+                    gameOver: false
+
                 }
             },
-            methods:{
-                sumArray(arr){
-                    sum=0;
-                    for(i=0, i<arr.length, i++;){
-                        sum+=arr[i]
+            methods: {
+                sumArray(array) {
+                    let sum = 0;
+                    for (let i = 0; i < array.length; i++) {
+                        sum += array[i];
                     }
-                    return sum
-                }
+                    return sum;
+                },
+                printNumbers(n) {
+                    soma = 0;
+                    for (let i = 0; i <= n; i++) {
+                        soma += i;
+                    }
+                    return soma;
+                },
+                printMultiples(number) {
+                    let soma = 0;
+                    for (let i = 0; i <= number; i++) {
+                        if (i % 3 == 0 || i % 5 == 0)
+                            soma += i;
+                    }
+                    return soma;
+                },
+                guessNumber(guess) {
+                    if (guess > this.secretNumber) {
+                        this.feedback = "Too high! Try again!";
+                        this.attempts++;
+                    } else if (guess < this.secretNumber) {
+                        this.feedback = "Too low! Try again!";
+                        this.attempts++;
+                    } else {
+                        this.feedback = "";
+                        this.gameOver = true;
+                    }
                 }
             }
-        }
-        ).mount('#app')
-
+        }).mount('#app');
     </script>
+
 </body>
 
 </html>
