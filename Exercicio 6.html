@@ -52,7 +52,8 @@
                     guess: 0,
                     secretNumber: Math.floor(Math.random() * 100) + 1,
                     feedback: "",
-                    attempts: 0,
+                    lastGuess: "",
+                    attempts: [],
                     gameOver: false
 
                 }
@@ -81,15 +82,20 @@
                     return soma;
                 },
                 guessNumber(guess) {
-                    if (guess > this.secretNumber) {
-                        this.feedback = "Too high! Try again!";
-                        this.attempts++;
-                    } else if (guess < this.secretNumber) {
-                        this.feedback = "Too low! Try again!";
-                        this.attempts++;
+                    if (guess === this.lastGuess) {
+                        this.feedback = "You already guessed that number!";
                     } else {
-                        this.feedback = "";
-                        this.gameOver = true;
+                        if (guess > this.secretNumber) {
+                            this.feedback = "Too high! Try again!";
+                        } else if (guess < this.secretNumber) {
+                            this.feedback = "Too low! Try again!";
+                        } else {
+                            this.feedback = "";
+                            this.attempts = this.attempts.length + 1; 
+                            this.gameOver = true;
+                        }
+                        this.lastGuess = guess;
+                        this.attempts.push(guess);
                     }
                 }
             }
