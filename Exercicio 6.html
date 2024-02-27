@@ -82,14 +82,16 @@
                     return soma;
                 },
                 guessNumber(guess) {
-                    if (guess === this.lastGuess) {
+                    if (this.attempts.includes(guess)) {
                         this.feedback = "You already guessed that number!";
                     } else {
                         if (guess > this.secretNumber) {
                             this.feedback = "Too high! Try again!";
-                        } else if (guess < this.secretNumber) {
+                        } 
+                        else if (guess < this.secretNumber) {
                             this.feedback = "Too low! Try again!";
-                        } else {
+                        } 
+                        else {
                             this.feedback = "";
                             this.attempts = this.attempts.length + 1; 
                             this.gameOver = true;
