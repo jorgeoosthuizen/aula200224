@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>Lista de Tarefas</h2>
+        <input type="text" v-model="texto" ref="inputText">
+        <button @click="insereTarefa">Inserir</button>
+        <button @click="toggleEdit()">Editar</button>
+        <ul>
+            <li v-for="(item, index) in tarefas"
+                v-bind:class="{ prioritario: item.prioritario, realizado: item.realizado }">
+                {{ item.nome }}
+
+                <input type="checkbox" v-if="editar" @click="alteraPrioridade(item)">
+                <input type="checkbox" v-if="editar" @click="alteraRealizado(item)">
+            </li>
+
+        </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue@3.2.31/dist/vue.global.js"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    texto: '',
+                    editar: false,
+                    tarefas: [
+                        { nome: "Exercícios de HTML", prioritario: false, realizado: false },
+                        { nome: "Exercícios de CSS", prioritario: false, realizado: false },
+                        { nome: "Exercícios de JavaScript", prioritario: false, realizado: false },
+                        { nome: "Exercícios de VueJS", prioritario: false, realizado: false },
+                        { nome: "Juntar tudo no Projeto 1", prioritario: false, realizado: false }
+                    ]
+                }
+            },
+            methods: {
+                insereTarefa(tarefa) {
+                    if (this.texto.trim() !== "") {
+                        this.tarefas.push({
+                            nome: this.texto,
+                            prioritario: false,
+                            realizado: false
+                        });
+                        this.texto = '';
+                    }
+                },
+                alteraPrioridade(item) {
+                    item.prioritario = !item.prioritario;
+                },
+                alteraRealizado(item) {
+                    item.realizado = !item.realizado;
+                },
+                toggleEdit() {
+                    this.editar = !this.editar
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+
+<style>
+    .realizado {
+        color: grey;
+        text-decoration: line-through;
+    }
+
+    .prioritario {
+        color: red;
+    }
+</style>
+</body>
+
+
+
+</html>
